@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Client Comparison Tool</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <main class="container">
+    <header>
+      <h1>Client Comparison Tool</h1>
+      <p>Compare client worksheets using intelligent Banner + Address matching.</p>
+    </header>
+
+    <section class="card">
+      <h2>1. Upload Excel workbook</h2>
+      <div id="dropZone" class="drop-zone">
+        <input id="fileInput" type="file" accept=".xlsx,.xls" hidden>
+        <button id="chooseBtn" class="primary">Choose Excel File</button>
+        <p>or drag and drop an Excel file here</p>
+        <small>The file is processed in your browser.</small>
+      </div>
+      <div id="fileInfo" class="hidden"></div>
+    </section>
+
+    <section id="sheetSection" class="card hidden">
+      <h2>2. Workbook sheets</h2>
+      <div id="sheetList"></div>
+      <div id="warnings"></div>
+      <button id="compareBtn" class="primary">Compare Workbook</button>
+    </section>
+
+    <section id="resultSection" class="card hidden">
+      <h2>3. Result</h2>
+      <div id="resultSummary"></div>
+      <button id="downloadBtn" class="success">Download Comparison Result</button>
+    </section>
+
+    <section class="card explanation">
+      <h2>How matching works</h2>
+      <ul>
+        <li>Sheet order is preserved. Sheet 2 checks Sheet 1 first; Sheet 3 checks Sheet 1, then Sheet 2; and so on.</li>
+        <li>Exact Banner + Address matches are accepted.</li>
+        <li>Formatting differences in Banner or Address are normalized.</li>
+        <li>If Banner is the same/similar and Address has a normal variation such as STREET/ST, AVENUE/AVE, SUITE/STE, or a suite number, it can match.</li>
+        <li>If Address is the same and Banner has a meaningful variation, the tool can match it using banner similarity.</li>
+        <li>The first/oldest matching sheet wins.</li>
+        <li><code>Matched_Sheet</code> is added to every valid comparison sheet and remains blank when no match is found.</li>
+        <li><code>Match_Type</code> explains why a match was accepted.</li>
+      </ul>
+    </section>
+  </main>
+
+  <script src="https://cdn.jsdelivr.net/npm/xlsx@0.18.5/dist/xlsx.full.min.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
